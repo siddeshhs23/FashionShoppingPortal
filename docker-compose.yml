@@ -1,0 +1,18 @@
+services:
+  backend:
+    build:
+      context: ./frontend/backend
+    container_name: fashion-backend-compose
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./frontend/backend/.env
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: fashion-frontend-compose
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

@@ -15,6 +15,16 @@ pipeline {
             }
         }
 
+        stage('Create Environment File') {
+            steps {
+                bat '''
+                echo PORT=5000> frontend\\backend\\.env
+                echo MONGO_URI=mongodb://host.docker.internal:27017/fashionPortal>> frontend\\backend\\.env
+                echo JWT_SECRET=mysecretkey>> frontend\\backend\\.env
+                '''
+            }
+        }
+
         stage('Start Application') {
             steps {
                 bat 'docker compose up -d'
